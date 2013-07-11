@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /*
+URl Usage: node grader.js -c checks.json --url http://shielded-sands-9001.herokuapp.com/ 
+Author (modification): syed.shariyar@gmail.com  
 Automatically grade files for the presence of specified HTML tags/attributes.
 Uses commander.js and cheerio. Teaches command line application development
 and basic DOM parsing.
@@ -24,8 +26,12 @@ References:
 var fs = require('fs');
 var program = require('commander');
 var cheerio = require('cheerio');
+var rest = require ('restler');
+var util = require ('util');
 var HTMLFILE_DEFAULT = "index.html";
 var CHECKSFILE_DEFAULT = "checks.json";
+var HTMLURL_DEFAULT = "dummyURL.com";
+var DOWNLOADED_FILE = "downloaded_file.html";
 
 var assertFileExists = function(infile) {
     var instr = infile.toString();
@@ -35,6 +41,36 @@ var assertFileExists = function(infile) {
     }
     return instr;
 };
+
+var processURL = function (result){
+    
+    if (result instanceof Error){
+	util.puts('Error: ' + result.message);
+	process.exit(1);
+    } else {
+	
+	//util.puts(result.toString());
+	fs.writeFileSync(DOWNLOADED_FILE, result);
+        var checkJson = checkHtmlFile(DOWNLOADED_FILE, program.checks);
+	var outJson = JSON.stringify(checkJson, null, 4);
+	console.log(outJson);
+    }
+}
+
+var assertURLExists =  function(theURL){
+    
+    if ((theURL.indexOf("http") > -1) &&  (theURL.indexOf(".")> -1)){
+	if (fs.existsSync(theURL)) {
+	    fs.unlinkSync(DOWNLOADED_FILE);    
+	}
+	return theURL.toString();
+    } else {
+	console.error("Incorrect URL, remove \"www\" if any.");
+	process.exit(1);
+    }
+//    return rest.get(theUrl).on('complete',downloadURL); 
+}
+
 
 var cheerioHtmlFile = function(htmlfile) {
     return cheerio.load(fs.readFileSync(htmlfile));
@@ -61,14 +97,30 @@ var clone = function(fn) {
     return fn.bind({});
 };
 
+
 if(require.main == module) {
     program
         .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
         .option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
+	.option ('-u, --url <url of page>', 'Link to your page', clone(assertURLExists), HTMLURL_DEFAULT)
         .parse(process.argv);
-    var checkJson = checkHtmlFile(program.file, program.checks);
-    var outJson = JSON.stringify(checkJson, null, 4);
-    console.log(outJson);
+    
+    
+    if (program.url != HTMLURL_DEFAULT){
+	//console.error(program);
+	//fileName = program.url;
+	rest.get(program.url).on('complete',processURL);
+	
+	//console.error("Processing Complete!");
+    } else {
+	
+	var checkJson = checkHtmlFile(program.file, program.checks);
+	var outJson = JSON.stringify(checkJson, null, 4);
+	console.log(outJson);
+    }
+    
+   
+
 } else {
     exports.checkHtmlFile = checkHtmlFile;
 }
