@@ -74,6 +74,20 @@
       .video, .thermometer, .order, .social, .statistics {
           text-align: center;
       }
+.video {
+      position: relative;
+      padding-bottom: 25%;
+      height: 0;
+      overflow: hidden;
+}
+.video iframe,  
+.video object,  
+.video embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+       height: 100%; }
       .statistics h3, .statistics p {
          color: white;
       }
@@ -115,8 +129,8 @@
 	 <div class="nav-collapse collapse">
 	   <ul class="nav">
 	     <li class="active"><a href="#">Home</a></li>
-             <li><a href="#about"> About</a></li>
-	     <li><a href="#contact"> Contact</a></li>
+             <li><a href="#accordion2"> About</a></li>
+	     <li><a href="#accordion2"> Contact</a></li>
 	   </ul>
 	 </div> <!--/.nav-collapse -->
 	</div>
@@ -128,17 +142,18 @@
     <!--- Font and paired font of .heading/.subheading from Google Fonts -->
       <div class="row-fluid heading">
         <div class="span12">
-	  <h1> Autmated debugging of deployed apps </h1>
+	  <h1> Debug007 </h1>
 	</div>
       </div> 
      <div class="row-fluid subheading">
        <div class="span12">
-	 <p class="lead"> One sentence description. </p>
+	 <p class="lead"> Automatically debugging fault locations in operational software applications </p>
        </div>
      </div>
      <div class="row-fluid pitch">
        <div class="span5 offset1 video">
-	 <img class="img-polaroid" src="http://placehold.it/480x300">
+	 
+	 <iframe  frameborder="0" width="480" height="300" src="http://goanimate.com/player/embed/07GA9b6tYZXU"></iframe>
 	</div>
 
   <!-- Defining a new action div to contain statistics, order and share button. --> 
@@ -147,17 +162,17 @@
 	 <div class="statistics">
 	   <div class="span4">
 	     <div class="linediv-l">
-	       <h3>1000</h3> <p> backers </p>
+	       <h3>10</h3> <p> backers </p>
 	    </div>
 	   </div>
 	   <div class="span4">
 	     <div class="linediv-c">
-	       <h3>$5000</h3> <p>of $10,000 </p>
+	       <h3>$100</h3> <p>of $100,000 </p>
 	     </div>
 	   </div>
 	   <div class="span4">
 	     <div class="linediv-r">
-	       <h3>10</h3> <p> days left </p>
+	       <h3>30</h3> <p> days left </p>
 	     </div>
 	   </div>
 	  </div>
@@ -182,14 +197,11 @@
      <!-- Marketing part -->
       <div class="row-fluid section1">
         <div class="span5 offset1 asset">
-          <img class="img-polaroid" src="http://placehold.it/480x300">
+          <img class="img-polaroid" src="http://i.imgur.com/mJVuKfn.jpg">
         </div>
         <div class="span5 copy">
           <p>
-              Some sample text to be put here. Which would be great!
-	      Some sample text to be put here. Which would be great!
-	      Some sample text to be put here. Which would be great!
-	      Some sample text to be put here. Which would be great!
+              Developers collect failure reports from software applications in operation to debug the origins of faults in software code. Crash reports of applications with large client bases can be quite overwhleming to software developers, let alone the complexity of faults to be debugged. Manual identification of faulty code from these failure reports is an arduous task and can consume upto 40-90% of the total time needed to fix the fault. Debug007 is a tool that automatically pinpoints the locations of faults in the failure reports of the deployed software applications. Initially, Debug007 will be available as SaaS for mobile applications.  
 	  </p>
 	</div>
       </div>
@@ -197,21 +209,11 @@
             <div class="row-fluid section2">
         <div class="span5 offset1 copy copy-right">
           <p>
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
-            Copyright text to be put here. THis would be great too :).
+           Studies show that approximately 50-90% of failures in deployed applications occur due to previous faults and a majority of them originate from only 20% of the code. Using machine learning algorithms, Debug007 exploits this behaviour of software applications to point out a list of suspected functions or components for a failure report. Our case studies show that developers can diangose faulty source code for failure reports by reviewing first few functions/components from the suspected list. However, contemporary commerical technologies avialable to debug failure reports only provide a set of different views which developers need to correlate manually to diagnose the fault.
           </p>
         </div>
         <div class="span5 asset">
-          <img class="img-polaroid" src="http://placehold.it/480x300">
+          <img class="img-polaroid" src="http://i.imgur.com/mJVuKfn.jpg">
         </div>
       </div>
 
@@ -224,12 +226,12 @@
                 <div class="accordion-heading">
                   <a class="accordion-toggle" data-toggle="collapse"
                      data-parent="#accordion2" href="#collapseOne">
-                    What does FAQ stand for?
+                    Who are we?
                   </a>
                 </div>
                 <div id="collapseOne" class="accordion-body collapse">
                   <div class="accordion-inner">
-                    Frequently Asked Question.
+                    Debug007 is a product of research conducted on software behaviour at Concordia University and Western University of Canada. Several case studies have been performed on commerical and public programs about the validity of Debug007 technique. Results show that faults in 70-90% of failure reports can be found by reivewing upto top 3 functions from the suspected list of Debug007.
                   </div>
                 </div>
               </div>
@@ -237,12 +239,12 @@
                 <div class="accordion-heading">
                   <a class="accordion-toggle" data-toggle="collapse"
                      data-parent="#accordion2" href="#collapseTwo">
-                    What's a Frequently Asked Question?
+                    How to contact us?
                   </a>
                 </div>
                 <div id="collapseTwo" class="accordion-body collapse">
                   <div class="accordion-inner">
-                    A question which is commonly asked by users.
+                    You can contact us by sending email to smurtaza@encs.concordia.ca.
                   </div>
                 </div>
               </div>
