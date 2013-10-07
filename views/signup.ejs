@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Debug007 | Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Shariyar Murtaza">
+	
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="css/glyphicons.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href="css/base.css" rel="stylesheet">
+	<link href="css/blue.css" rel="stylesheet">
+	
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="ico/favicon.png">
+  </head>
+
+  <body>
+
+	<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-primary btn-dropnav" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>		
+          <a class="brand" href="/">Debug007</a>
+		  <div class="nav-collapse collapse">
+            <ul class="nav pull-right animated">
+			   <li>  <a href="/" tabindex="-1">Home</a></li>
+              		  <li ><a href="/#features">Features</a></li>
+                          <li><a href="/#pricing">Pricing</a></li>
+                          <li><a href="/#how_it_works">How it Works</a></li>
+			  
+                         <li><a href="login">Login</a></li>
+			 
+			  <li class="active"><a href="signup">Sign Up</a></li>
+			  <!--<li><a href="blog.html">Contact</a></li>-->
+                      	
+            </ul>
+		  </div>
+        </div>
+      </div>
+    </div>
+
+	<div id="content">
+	  <div class="container">
+	    <div class="row"> 
+		  <div class="span12">
+		    <div class="well well-form txt-lefty">
+                    <h3>Sign Up</h3>
+                        <!-- store the userId on the client side in a hidden input field //-->
+                         <input type="hidden" id="userId">
+		     <form method="post" id="account-form">
+		        <div class="control-group">
+		          <div id="fname-cg" class="controls">
+					<input type="text" id="fname-tf" maxlength="150" name="firstName" placeholder="First Name" class="span3" required>
+				  </div>
+			    </div>
+		        <div class="control-group">
+		          <div id="lname-cg" class="controls">
+					<input type="text" id="lname-tf" maxlength="150" name="lastName" placeholder="Last Name" class="span3" required>
+				  </div>
+			    </div>
+		        <div id="user-cg" class="control-group">
+		          <div class="controls">
+					<input type="email" id="user-tf" maxlength="255" name="user" placeholder="Email (Username)" class="span3" required>
+				  </div>
+			    </div>
+		        <div id="pass-cg" class="control-group">
+		          <div class="controls">
+					<input type="password" id="pass-tf" minlength="6" maxlength="25" name="pass" placeholder="Password" class="span3" required>
+				  </div>
+			    </div>
+		        <div class="control-group">
+		          <div class="controls">
+					<input type="password" id="pass-again" minlength="6" maxlength="25" name="passagain" placeholder="Confirm Password" class="span3" required data-validation-matches-match="pass" data-validation-matches-message="Must match password entered above">
+				  </div>
+			    </div>
+                          <div id="message-cg" class="control-group" >
+		          <div class="controls">
+					<textarea id="message-tf" name="message" placeholder="Message: Organization, URL or any thing else" 
+                                                  class="span3" maxlength="500"  type="text" rows="5" maxlength="1000" ></textarea>
+				  </div>
+			    </div>
+                <div class="form-actions">
+			      <label class="checkbox">
+                    <input type="checkbox" name="terms" required  data-validation-required-message="You must agree to the terms and conditions">
+                    I agree to the terms and conditions
+                  </label>
+			      <button class="btn btn-primary" type="submit" id="account-form-btn2">Sign Up</button>
+                </div> 
+              </form>
+		      <div class="form-extra">
+			  <!--  <button class="btn btn-info"><i class="glyphicons-twitter"></i> Login with Twitter</button>
+			    <button class="btn btn-danger"><i class="glyphicons-google_plus"></i> Login with Google</button> -->
+			  </div> 			  
+            </div>
+		  </div>  
+		</div>  	
+	  </div>
+	</div>
+      
+      
+<!-- display form errors in a custom modal window //-->
+  <div class="modal-form-errors modal hide fade">
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close">x</button>
+      <h3>Whoops!</h3>
+    </div>
+    <div class="modal-body">
+      <p class="subheading">It looks like there was a problem.</p>
+      <ul></ul>
+    </div>
+    <div class="modal-footer">
+      <button data-dismiss="modal" class="btn btn-danger">OK</button>
+    </div>
+  </div>
+
+  <div class="modal-alert modal hide fade">
+    <div class="modal-header">
+      <button data-dismiss="modal" class="close">x</button>
+      <h3></h3>
+    </div>
+    <div class="modal-body">
+      <p></p>
+    </div>
+    <div class="modal-footer">
+      <button data-dismiss="modal" id="ok" class="btn btn-danger">OK</button>
+    </div>
+  </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.fitvids.js"></script>
+	<script src="js/jqBootstrapValidation.js"></script>
+	<script src="js/bounce.js"></script>	
+         
+        <script src="/js/jquery.form.js"></script>
+        <script src="/js/bootstrap-modal.js"></script>
+        <script src="/js/bootstrap-transition.js"></script>
+        <script src="/js/views/signup.js"></script>
+        <script src="/js/controllers/signupController.js"></script>
+        <script src="/js/form-validators/accountValidator.js"></script>
+
+  </body>
+</html>

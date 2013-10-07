@@ -1,29 +1,28 @@
 {
-  "name": "node-js-sample",
+  "name": "debug007",
   "version": "0.0.1",
-  "description": "a sample node.js app for heroku",
+  "description": "Crowdfunder template",
   "main": "web.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express": "3.x"
+    "sequelize": "~2.0.0-alpha2",
+    "pg": "~2.3.1",
+    "ejs": "~0.8.4",
+    "express": "~3.3.4",
+    "async": "~0.2.9",
+    "request": "~2.27.0",
+    "underscore": "~1.5.1",
+    "moment" : "1.7.2",
+    "emailjs": "0.3.3"
   },
   "engines": {
-    "node": "0.8.x",
-    "npm": "1.1.x"
+     "node": "0.10.12",
+    "npm": "1.2.30"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/heroku/node-js-sample"
-  },
-  "keywords": [
-    "node",
-    "heroku"
-  ],
-  "author": "Mark Pundsack",
-  "license": "BSD",
-  "gitHead": "90fd58e343c29e54fc1d4e19036595500b2bdc21"
+  "author": "Shariyar Murtaza"
+
   
   
   
