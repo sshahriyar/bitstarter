@@ -271,17 +271,17 @@ module.exports = function(app) {
         });
         
         
-        app.get('paypalipn',function (req,res){
+        app.get('/paypalipn',function (req,res){
       
             console.log('Paypal');
            
             if(typeof req.body != "undefined") {
                 ipn.verify(req.body, function callback(err, msg) {
                     if (err) {
-                        console.log.error('IPN: ' + err);
+                        console.log('IPN: ' + err);
                     } else {
                         if (req.body.payment_status == 'Completed' && msg == "VERIFIED") {
-                            console.info('IPN: ' + msg + " " + req.body.txn_id + " " + req.body.payer_email);
+                            console.log('IPN: ' + msg + " " + req.body.txn_id + " " + req.body.payer_email);
                         }
                     }
                     res.send(200);
