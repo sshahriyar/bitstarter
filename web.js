@@ -18,7 +18,7 @@ var oneDay = 86400000;
    
 app.configure(function(){
         //app.set('port', 8080);
-	app.set('port', process.env.PORT || 8081);
+	app.set('port', process.env.PORT || 8080);
 	app.set('views', __dirname + '/views');
         
 	app.set('view engine', 'ejs');
@@ -89,7 +89,3 @@ global.db.sequelize.sync().complete(function(err) {
 
 
 
-var port = process.env.PORT || 8080;
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
