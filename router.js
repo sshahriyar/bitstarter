@@ -272,8 +272,9 @@ module.exports = function(app) {
         
         
         app.get('/paypalipn',function (req,res){
-      
+             res.send(200);
             console.log('Paypal');
+            
            
             if(typeof req.body != "undefined") {
                 ipn.verify(req.body, function callback(err, msg) {
@@ -282,17 +283,17 @@ module.exports = function(app) {
                     } else {
                         if (req.body.payment_status == 'Completed' && msg == "VERIFIED") {
                             console.log('IPN: ' + msg + " " + req.body.txn_id + " " + req.body.payer_email);
-                            res.render('ipnpage',{
-                                msg : msg, 
-                                txn_id: req.body.txn_id,
-                                email: req.body.payer_email,
-                                first_name: req.body.first_name,
-                                last_name: req.body.last_name,
-                                payment_date: req.body.payment_date,
-                                payment_status: req.body.payment_status,
-                                amount: req.body.mc_gross,
-                                currency: req.body.mc_currency      
-                            });
+//                            res.render('ipnpage',{
+//                                msg : msg, 
+//                                txn_id: req.body.txn_id,
+//                                email: req.body.payer_email,
+//                                first_name: req.body.first_name,
+//                                last_name: req.body.last_name,
+//                                payment_date: req.body.payment_date,
+//                                payment_status: req.body.payment_status,
+//                                amount: req.body.mc_gross,
+//                                currency: req.body.mc_currency      
+//                            });
                            
                         }
                     }
