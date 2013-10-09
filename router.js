@@ -2,7 +2,7 @@
 var CT = require('./models/country-list');
 var AM = require('./models/account-manager');
 var EM = require('./models/email-dispatcher');
-
+var restler= require ('restler');
 module.exports = function(app) {
 
 // main  //
@@ -246,6 +246,52 @@ module.exports = function(app) {
 		});
 	});
 	
+        app.get('/paypalpdt',function (req,res){
+            //Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you. 
+            //
+            var transactionID=req.param('tx');
+            if (transactionID != undefined){
+                    restler.post('https://www.paypal.com/cgi-bin/webscr', {
+                        data: { cmd: "_notify-synch",
+                                 tx: transactionID,
+                                 at:"oUfqIr9mMvyYSmt5q2aVkO_YdufpgHwEvbFLcXbQrF8iSm-6LtyO6bWA7Im" ,
+                               }
+                     }).on('complete', function(data, response) {
+                             console.log(data);
+                            if (result instanceof Error) {
+                                  console.log('Error: ' + data.message);
+                                 // this.retry(5000); // try again after 5 sec
+                             } else {
+                                 console.log(data);
+                             }
+                   });
+             }
+        });
+        
+        
+        app.get('paypalipn',function (req,res){
+      
+            console.log('Paypal');
+            var ipn = require('paypal-ipn');
+            if(typeof req.body != "undefined") {
+                ipn.verify(req.body, function callback(err, msg) {
+                    if (err) {
+                        console.log.error('IPN: ' + err);
+                    } else {
+                        if (req.body.payment_status == 'Completed' && msg == "VERIFIED") {
+                            console.info('IPN: ' + msg + " " + req.body.txn_id + " " + req.body.payer_email);
+                        }
+                    }
+                    res.send(200);
+                    res.end();
+                });
+            }
+            res.send(200);
+            res.end();
+
+        })
+        
+        
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };
