@@ -248,52 +248,51 @@ module.exports = function(app) {
 		});
 	});
 	
-        app.get('/paypalpdt',function (req,res){
-            //Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you. 
-            //
-            var transactionID=req.param('tx');
-            if (transactionID != undefined){
-                    restler.post('https://www.paypal.com/cgi-bin/webscr', {
-                        data: { cmd: "_notify-synch",
-                                 tx: transactionID,
-                                 at:"oUfqIr9mMvyYSmt5q2aVkO_YdufpgHwEvbFLcXbQrF8iSm-6LtyO6bWA7Im" ,
-                               }
-                     }).on('complete', function(data, response) {
-                             console.log(data);
-                            if (result instanceof Error) {
-                                  console.log('Error: ' + data.message);
-                                 // this.retry(5000); // try again after 5 sec
-                             } else {
-                                 console.log(data);
-                             }
-                   });
-             }
-        });
+//        app.post('/paypalpdt',function (req,res){
+//            //Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you. 
+//            //
+//            var transactionID=req.param('tx');
+//            if (transactionID != undefined){
+//                    restler.post('https://www.paypal.com/cgi-bin/webscr', {
+//                        data: { cmd: "_notify-synch",
+//                                 tx: transactionID,
+//                                 at:"oUfqIr9mMvyYSmt5q2aVkO_YdufpgHwEvbFLcXbQrF8iSm-6LtyO6bWA7Im" ,
+//                               }
+//                     }).on('complete', function(data, response) {
+//                             console.log(data);
+//                            if (result instanceof Error) {
+//                                  console.log('Error: ' + data.message);
+//                                 // this.retry(5000); // try again after 5 sec
+//                             } else {
+//                                 console.log(data);
+//                             }
+//                   });
+//             }
+//        });
         
         
-        app.get('/paypalipn',function (req,res){
-             res.send(200);
-            console.log('Paypal');
+        app.post('/paypalipn',function (req,res){
+             
+          //  console.log('Paypal');
             
-           
-            if(typeof req.body != "undefined") {
+              if(typeof req.body != "undefined") {
                 ipn.verify(req.body, function callback(err, msg) {
                     if (err) {
                         console.log('IPN: ' + err);
                     } else {
                         if (req.body.payment_status == 'Completed' && msg == "VERIFIED") {
-                            console.log('IPN: ' + msg + " " + req.body.txn_id + " " + req.body.payer_email);
-//                            res.render('ipnpage',{
-//                                msg : msg, 
-//                                txn_id: req.body.txn_id,
-//                                email: req.body.payer_email,
-//                                first_name: req.body.first_name,
-//                                last_name: req.body.last_name,
-//                                payment_date: req.body.payment_date,
-//                                payment_status: req.body.payment_status,
-//                                amount: req.body.mc_gross,
-//                                currency: req.body.mc_currency      
-//                            });
+                           // console.log('IPN: ' + msg + " " + req.body.txn_id + " " + req.body.payer_email);
+                             console.log(
+                                "msg :"+ msg+ 
+                                "txn_id:"+ req.body.txn_id+
+                                "email:"+ req.body.payer_email+
+                                "first_name:"+ req.body.first_name+
+                                "last_name:"+ req.body.last_name+
+                                "payment_date:"+ req.body.payment_date+
+                                "payment_status:"+ req.body.payment_status+
+                                "amount:"+ req.body.mc_gross+
+                                "currency:"+ req.body.mc_currency      
+                            );
                            
                         }
                     }
@@ -304,7 +303,7 @@ module.exports = function(app) {
             res.send(200);
             res.end();
 
-        })
+        });
         
         
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
