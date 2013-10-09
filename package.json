@@ -15,11 +15,14 @@
     "request": "~2.27.0",
     "underscore": "~1.5.1",
     "moment" : "1.7.2",
-    "emailjs": "0.3.3"
+    "emailjs": "0.3.3",
+    "restler": "2.0.1",
+    "paypal-ipn":"1.0.1"
+    
   },
   "engines": {
      "node": "0.10.12",
-    "npm": "1.2.30"
+     "npm": "1.2.30"
   },
   "author": "Shariyar Murtaza"
 

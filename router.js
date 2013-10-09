@@ -3,6 +3,8 @@ var CT = require('./models/country-list');
 var AM = require('./models/account-manager');
 var EM = require('./models/email-dispatcher');
 var restler= require ('restler');
+ var ipn = require('paypal-ipn');
+ 
 module.exports = function(app) {
 
 // main  //
@@ -272,7 +274,7 @@ module.exports = function(app) {
         app.get('paypalipn',function (req,res){
       
             console.log('Paypal');
-            var ipn = require('paypal-ipn');
+           
             if(typeof req.body != "undefined") {
                 ipn.verify(req.body, function callback(err, msg) {
                     if (err) {
