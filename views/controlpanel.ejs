@@ -43,10 +43,7 @@
                           <li><a href="/#pricing">Pricing</a></li>
                           <li><a href="/#how_it_works">How it Works</a></li>
 			  
-                         <li><a href="#" id="btn-logout">Sign Out</a></li>
-			 
-			 
-			  <!--<li><a href="blog.html">Contact</a></li>-->
+                     
                       	
             </ul>
 		  </div>
@@ -57,7 +54,7 @@
 	<div id="content">
 	  <div class="container">
 	    <div class="row"> 
-		  <div class="span12">
+		  <div class="span5">
 		    <div class="well well-form txt-lefty">
                     <h3>Update Your Account Settings</h3>
                         
@@ -100,9 +97,35 @@
 			    <button class="btn btn-danger"><i class="glyphicons-google_plus"></i> Login with Google</button> -->
 			  </div> 			  
             </div>
+
+     <div class="span5">
+             <h2>Your Donation Details</h2>
+                <table class="table table-striped">
+                  <thead>
+                    <th>Transaction ID</th>
+                    <th>Amount</th>
+                    <th>Transaction time</th>
+                  </thead>
+                  <tbody>
+                    <% for(var i = 0; i < orders.length; i++) {%>
+                       <tr>
+                         <td><%= orders[i].transactionId %></td>
+                         <td><%= orders[i].amount %></td>
+                         <td><%= orders[i].transactionTime %></td>
+                       </tr>
+                    <% } %>
+                  </tbody>             
+             </table>
+
+        </div>
+<!--row -->
 		  </div>  
-		</div>  	
+		</div>  
 	  </div>
+
+     
+
+
 	</div>
       
       

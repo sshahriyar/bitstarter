@@ -14,10 +14,12 @@ $(document).ready(function(){
 		},
 		success	: function(responseText, status, xhr, $form){
 			rv.showSuccess("Your password has been reset.");
-			setTimeout(function(){ window.location.href = '/'; }, 3000);
+                        $('#submit').attr('disabled', 'disabled');
+			setTimeout(function(){ window.location.href = '/login'; }, 3000);
 		},
 		error : function(){
-			rv.showAlert("I'm sorry something went wrong, please try again.");
+			rv.showAlert("I'm sorry something went wrong, please try again later.");
+                        setTimeout(function(){ window.location.href = '/'; }, 3000);
 		}
 	});
 

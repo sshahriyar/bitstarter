@@ -68,23 +68,33 @@ module.exports = function(app) {
 	// if user is not logged-in redirect back to login page //
 	        res.redirect('/login');
 	    }   else{
-			
-                        res.render('controlpanel', {
-				title : 'Control Panel',
-				//countries : CT,
-				uid : req.session.user.id,
-                                firstName :req.session.user.firstName,
-                                lastName :req.session.user.lastName,
-                                email: req.session.user.email
-                                
-			});
+                        
+			AM.orderfn(req.session.user.id, 
+                        /* successfunction */function(orderList){
+                                                    cPanelData={
+                                                        title : 'Control Panel',
+                                                        //countries : CT,
+                                                        uid : req.session.user.id,
+                                                        firstName :req.session.user.firstName,
+                                                        lastName :req.session.user.lastName,
+                                                        email: req.session.user.email ,
+                                                        orders: orderList
+                                                       };
+                                               
+                                                console.log (orderList);
+                                                // console.log (orderList[0].transactionId);
+                                                res.render('controlpanel',cPanelData);},
+                        /*error function */ function(err){
+                                                console.log(err);
+                                                response.send("Unable to retrieve your donations");
+                                            });
 	    }
 	});
 	
 	app.post('/controlpanel', function(req, res){
             //console.log(req.session.user);
              //console.log(req.param('userid'));
-        if (req.param('userid') != undefined) {
+            if (req.param('userid') != undefined) {
                
                         if (req.param('userid')!= req.session.user.id){
                             res.send("Use of illegal user id", 400);
@@ -157,7 +167,7 @@ module.exports = function(app) {
 			password    : req.param('pass'),
 			message     : req.param('message')
                  };
-		AM.addNewAccount(newData, function(e){
+		AM.addNewAccount(newData, function(e,hPass){
 			if (e){
 				res.send(e, 400);
 			}	else{
@@ -270,6 +280,21 @@ module.exports = function(app) {
 //             }
 //        });
         
+//        app.get('/paypalipn',function(req,res){
+//                            var ipnData={
+//                                              //message      : msg, 
+//                                              txn_id       : "12332252524525",
+//                                              email        : "justsshary@hotmail.com",
+//                                              firstName    : "Shary",
+//                                              lastName     : "Murtaza",
+//                                              payment_date : "2013-04-10",
+//                                            // paymentStatus: req.body.payment_status,
+//                                              amount       : 200.50
+//                                            //  currency     : req.body.mc_currency      
+//                                          };
+//                                          ipnModeling(ipnData);
+//                                       
+//        });
         
         app.post('/paypalipn',function (req,res){
              
@@ -282,17 +307,20 @@ module.exports = function(app) {
                     } else {
                         if (req.body.payment_status == 'Completed' && msg == "VERIFIED") {
                            // console.log('IPN: ' + msg + " " + req.body.txn_id + " " + req.body.payer_email);
-                             console.log(
-                                "msg :"+ msg+ 
-                                "txn_id:"+ req.body.txn_id+
-                                "email:"+ req.body.payer_email+
-                                "first_name:"+ req.body.first_name+
-                                "last_name:"+ req.body.last_name+
-                                "payment_date:"+ req.body.payment_date+
-                                "payment_status:"+ req.body.payment_status+
-                                "amount:"+ req.body.mc_gross+
-                                "currency:"+ req.body.mc_currency      
-                            );
+                                        var ipnData={
+                                              //message      : msg, 
+                                              txn_id       : req.body.txn_id,
+                                              email        : req.body.payer_email,
+                                              firstName    : req.body.first_name,
+                                              lastName     : req.body.last_name,
+                                              payment_date : req.body.payment_date,
+                                            // paymentStatus: req.body.payment_status,
+                                              amount       : req.body.mc_gross
+                                            //  currency     : req.body.mc_currency      
+                                          };
+                                          ipnModeling(ipnData);
+                                       
+                            
                            
                         }
                     }
@@ -304,6 +332,46 @@ module.exports = function(app) {
             res.end();
 
         });
+        
+        
+        var ipnModeling= function(ipnData){
+               AM.getAccountByEmail(ipnData.email, function(profileObj){
+                     if (profileObj){ // if there is an account
+                                var id=profileObj.id;
+                                 console.log("in ipn modeling" +"--"+id);                 
+                                AM.addNewOrder(profileObj, ipnData,function (e){
+                                      if (e)  console.log('error : ', e);
+                                      else{
+                                          profileObj.password=""; // don't send password for existing accounts
+                                          profileObj.amount=ipnData.amount;
+                                           EM.loginLink(profileObj, function(e, m){
+                                             if (e)  for (k in e) console.log('error : ', k, e[k]);
+                                           });
+                                       }
+                                });
+                                                    
+                        }else{// when account doesn't exist
+                                    ipnData.password="random_pass";
+                                     
+                                                 AM.addNewAccountandOrder(ipnData,function (e,hashPassword){
+                                                    if (e)  console.log('error : ', e);
+                                                    else{ 
+                                                         var loginData={firstName:ipnData.firstName, email:ipnData.email, 
+                                                                           password:hashPassword, amount:ipnData.amount};
+                                                          EM.loginLink(loginData, function(e, m){
+                                                              if (e)  for (k in e) console.log('error : ', k, e[k]);
+                                                           });                                  
+                                                       }
+                                                   });
+                                              
+                                      
+                           }
+
+
+
+               });
+                            
+        }
         
         
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });

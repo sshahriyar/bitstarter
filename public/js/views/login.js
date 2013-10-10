@@ -46,9 +46,10 @@ $(document).ready(function(){
 		},
 		success	: function(responseText, status, xhr, $form){
 			ev.showEmailSuccess("Check your email on how to reset your password.");
+                        setTimeout(function(){ window.location.href = '/login'; }, 3000);
 		},
 		error : function(){
-			ev.showEmailAlert("Sorry. There was a problem, please try again later.");
+			ev.showEmailAlert("Sorry. It seems this email doesn't exist.");
 		}
 	});
 	

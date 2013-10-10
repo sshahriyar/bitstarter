@@ -9,35 +9,7 @@ var dbHost 		= 'localhost';
 var dbName 		= 'debug007';
 var dbUser              = 'root';
 var db                  =require('../models');
-/* establish mysql database connection 
-  var connection = mysql.createConnection({
-  host     : dbHost,
-  user     : dbUser,
-  database :dbName,
-  password : 'root'
-});
 
-connection.connect(function(err) {
-  // connected! (unless `err` is set)
-  if (err) {
-        console.log('Unable to connect');
-        throw err;
-  }
-  else
-      console.log('Connected to '+dbHost+'::'+dbUser+'::'+ dbName);
-  
-});
-*/
-//var db = new MongoDB(dbName, new Server(dbHost, dbPort, {auto_reconnect: true}), {w: 1});
-//	db.open(function(e, d){
-//	if (e) {
-//		console.log(e);
-//	}	else{
-//		console.log('connected to database :: ' + dbName);
-//	}
-//});
-
-//var accounts = db.collection('accounts');
 
 /* login validation methods */
 
@@ -54,26 +26,6 @@ exports.autoLogin = function(user, password, callback)
 
 exports.manualLogin = function(user, pass, callback)
 {
-//	connection.query('SELECT email,pass from profile where firstname=\''+user+'\'', function(err, rows) {
-//                if (err) throw err;
-//                //console.log('The user id is: ', rows);
-//                if (rows[0] == null){
-//			callback('user-not-found');
-//		}	else{
-//			validatePassword(pass, rows[0].pass, function(err, res) {
-//				if (res){
-//                                     console.log('password verified');
-//					callback(null, rows[0].email);
-//				}	else{
-//                                         console.log('password not verified');
-//					callback('invalid-password');
-//                                        
-//				}
-//			});
-//                        console.log('The user id is: ', rows[0].email);
-//		}
-//                
-//           });
 
     
          global.db.Profile.findOne({email:user}, function(o) {
@@ -161,6 +113,53 @@ exports.updatePassword = function(email, newPass, callback)
 	});
 }
 
+/// this function should be called after validation of duplicate email, otherwise call addNewAccount
+exports.addNewAccountandOrder=function(newData, callback){
+            saltAndHash(newData.password, function(hashPassword){
+		 newData.password = hashPassword;
+                 //Another way of creating  instances
+                db.Profile.create({email: newData.email,
+                                firstName: newData.firstName,
+                                lastName:  newData.lastName,
+                                password:  newData.password,})
+                          .success(function (profile)
+		              {
+                                     db.Order.create({
+                                                     transactionId: newData.txn_id,
+                                                     amount: newData.amount,
+                                                     transactionTime: newData.payment_date,
+                                                     profileId : profile.id
+                                                     }
+                                                    ).success(function(){
+                                                        callback(null,hashPassword)
+                                                     }).error( function(err){
+                                                         callback(err,null);
+                                                     });
+                            }
+                                
+                 );
+            });
+};
+
+exports.addNewOrder= function(profile, orderData,callback){
+  //  var profileObj=Object.create(global.db.Profile,JSON.stringify(profile));
+    console.log("in add new order and the type of profileobj is"+ JSON.stringify(orderData));
+    global.db.Order.insert({
+                            transactionId: orderData.txn_id,
+                            amount: orderData.amount,
+                            transactionTime: orderData.payment_date,
+                            profileId: profile.id
+                            },
+                           callback);
+}
+
+exports.orderfn = function(profileId,successcb, errcb) {
+    var successFunction = function(orders_json) {
+	successcb(  orders_json);
+    };
+    
+    global.db.Order.allOrdersforPerson(profileId, successFunction, errcb);
+};
 /* account lookup methods */
 
 exports.deleteAccount = function(id, callback)
@@ -182,17 +181,20 @@ exports.validateResetLink = function(email, passHash, callback)
 
 exports.getAllRecords = function(callback)
 {
-//	accounts.find().toArray(
-//		function(e, res) {
-//		if (e) callback(e)
-//		else callback(null, res)
-//	});
+	//accounts.find().toArray(
+	//	function(e, res) {
+	//	if (e) callback(e)
+	//	else callback(null, res)
+	//});
 };
 
 exports.delAllRecords = function(callback)
 {
 //	accounts.remove({}, callback); // reset accounts collection for testing //
 }
+
+
+
 
 /* private encryption & validation methods */
 
@@ -251,4 +253,5 @@ var findByMultipleFields = function(a, callback)
 //		if (e) callback(e)
 //		else callback(null, results)
 //	});
-}
+};
+

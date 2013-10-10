@@ -10,7 +10,7 @@ $(document).ready(function(){
 				return false;
 			} 	else{
 			// push the disabled username field onto the form data array //
-				//formData.push({name:'user', value:$('#user-tf').val()})
+				formData.push({name:'user', value:$('#user-tf').val()})
 				return true;
 			}
 		},
@@ -27,7 +27,7 @@ $(document).ready(function(){
 	});
 	$('#name-tf').focus();
 	//$('#github-banner').css('top', '41px');
-
+        $('#user-tf').attr('disabled', 'disabled');
 // customize the account settings form //
 	
 	$('#account-form h1').text('Account Settings');
