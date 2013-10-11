@@ -23,6 +23,6 @@ git push production-heroku master:master
 #   to run the server locally (and read from these env variables), or 
      $ git push staging-heroku staging:master;
       git push production-heroku master:master	
-       $heroku  config:push --app sshahriyar-bitstarter-s-mooc
+       $heroku  config:push --app your-app
 
 #   to push the .env file remotely.
