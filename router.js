@@ -2,7 +2,7 @@
 var CT = require('./models/country-list');
 var AM = require('./models/account-manager');
 var EM = require('./models/email-dispatcher');
-var restler= require ('restler');
+//var restler= require ('restler');
 var ipn = require('paypal-ipn');
  
 module.exports = function(app) {
@@ -13,6 +13,16 @@ module.exports = function(app) {
                     res.render('index');
            
           });
+          
+          app.get('/paymentconfirm', function(req, res){
+   
+                    res.render('paymentconfirm');
+           
+          });
+          
+//          app.get('/info',function(req,res){
+//              res.render('blog');
+//          });
 //login page
 	app.get('/login', function(req, res){
 	// check if the user's credentials are saved in a cookie //
@@ -78,10 +88,11 @@ module.exports = function(app) {
                                                         firstName :req.session.user.firstName,
                                                         lastName :req.session.user.lastName,
                                                         email: req.session.user.email ,
+                                                        message: req.session.user.message,
                                                         orders: orderList
                                                        };
                                                
-                                                console.log (orderList);
+                                                console.log (req.session.user.message);
                                                 // console.log (orderList[0].transactionId);
                                                 res.render('controlpanel',cPanelData);},
                         /*error function */ function(err){
@@ -106,7 +117,7 @@ module.exports = function(app) {
                                         email 		: req.param('user'),
                                         firstName 	: req.param('firstName'),
                                         lastName 	: req.param('lastName'),
-                                        //country 	: req.param('country'),
+                                        message 	: req.param('message'),
                                         password	: req.param('pass')
                                 }, function(e, o){
                                         if (e){
@@ -259,7 +270,6 @@ module.exports = function(app) {
 	});
 	
 //        app.post('/paypalpdt',function (req,res){
-//            //Thank you for your payment. Your transaction has been completed, and a receipt for your purchase has been emailed to you. 
 //            //
 //            var transactionID=req.param('tx');
 //            if (transactionID != undefined){
@@ -314,7 +324,7 @@ module.exports = function(app) {
                                               firstName    : req.body.first_name,
                                               lastName     : req.body.last_name,
                                               payment_date : req.body.payment_date,
-                                            // paymentStatus: req.body.payment_status,
+                                              transactionType: "Paypal",
                                               amount       : req.body.mc_gross
                                             //  currency     : req.body.mc_currency      
                                           };

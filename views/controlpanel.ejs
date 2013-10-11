@@ -23,11 +23,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="ico/favicon.png">
+     <script src="js/google-ga-analytics.js"></script>
   </head>
 
   <body>
 
-	<div class="navbar navbar-fixed-top">
+  <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-primary btn-dropnav" data-toggle="collapse" data-target=".nav-collapse">
@@ -42,8 +43,8 @@
               		  <li ><a href="/#features">Features</a></li>
                           <li><a href="/#pricing">Pricing</a></li>
                           <li><a href="/#how_it_works">How it Works</a></li>
-			  
-                     
+			  <li><a href="#" id="btn-logout">Sign Out</a></li>
+
                       	
             </ul>
 		  </div>
@@ -51,10 +52,21 @@
       </div>
     </div>
 
-	<div id="content">
+	<div id="content" class="txt-middle">
 	  <div class="container">
+              <div class="row">
+		  <div class="span12">
+                      <h2>Your Account Information</h2><br>
+                      <p>This site is a crowd funder for Debug007. Complete functionality will soon be available. 
+                          Thank you for becoming a member.</p>
+                        
+		    <hr class="dashed">				
+		  </div>  
+		</div>  
+              
 	    <div class="row"> 
-		  <div class="span5">
+                
+		  <div class="span6">
 		    <div class="well well-form txt-lefty">
                     <h3>Update Your Account Settings</h3>
                         
@@ -86,7 +98,12 @@
 					<input type="password" id="pass-again" minlength="6" maxlength="25" name="passagain" placeholder="Confirm Password" class="span3" required data-validation-matches-match="pass" data-validation-matches-message="Must match password entered above">
 				  </div>
 			    </div>
-                         
+                          <div id="message-cg" class="control-group" >
+		          <div class="controls">
+					<textarea id="message-tf" name="message" placeholder="Message: Organization, URL or any thing else" 
+                                                  class="span3" maxlength="500"  type="text" rows="5"   > <%= message %></textarea>
+				  </div>
+			    </div>
                 <div class="form-actions">
 			      
 			      <button class="btn btn-primary" type="submit" id="account-form-btn2">Update</button>
@@ -97,14 +114,29 @@
 			    <button class="btn btn-danger"><i class="glyphicons-google_plus"></i> Login with Google</button> -->
 			  </div> 			  
             </div>
-
-     <div class="span5">
+       </div>
+             
+                
+            <div class="span5">
+                <h3> You can contribute by clicking below </h3>
+             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                   <input type="hidden" name="cmd" value="_s-xclick">
+                   <input type="hidden" name="hosted_button_id" value="MFA9QYTBNBRBS">
+                   <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"  name="submit" alt="Use PayPal!">
+                   <img alt=""  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </div>
+   <hr class="dashed">	
+                
+            
+        <div class="span5">
              <h2>Your Donation Details</h2>
-                <table class="table table-striped">
+                <table class="table table-striped ">
                   <thead>
                     <th>Transaction ID</th>
                     <th>Amount</th>
                     <th>Transaction time</th>
+                    <th>Transaction Type</th>
                   </thead>
                   <tbody>
                     <% for(var i = 0; i < orders.length; i++) {%>
@@ -112,21 +144,22 @@
                          <td><%= orders[i].transactionId %></td>
                          <td><%= orders[i].amount %></td>
                          <td><%= orders[i].transactionTime %></td>
+                         <td><%= orders[i].transactionType %></td>
                        </tr>
                     <% } %>
                   </tbody>             
              </table>
 
         </div>
+      
 <!--row -->
-		  </div>  
-		</div>  
-	  </div>
+  </div>  
+ </div>  
+</div>
 
      
 
 
-	</div>
       
       
 <!-- display form errors in a custom modal window //-->
@@ -185,7 +218,7 @@
          <script src="/js/views/controlPanel.js"></script>
          <script src="/js/controllers/controlPanelController.js"></script>
         <script src="/js/form-validators/accountValidator.js"></script>
- 
+         <script src="js/google-univ-analytics.js"></script>
  
   
 

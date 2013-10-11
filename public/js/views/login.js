@@ -46,6 +46,7 @@ $(document).ready(function(){
 		},
 		success	: function(responseText, status, xhr, $form){
 			ev.showEmailSuccess("Check your email on how to reset your password.");
+                         $('#submit').attr('disabled', 'disabled');
                         setTimeout(function(){ window.location.href = '/login'; }, 3000);
 		},
 		error : function(){

@@ -9,7 +9,8 @@ module.exports=function (sequelize, DataTypes){
     return sequelize.define('order',{
      transactionId    :   {type: DataTypes.STRING, allowNull: false },
      amount            :   {type: DataTypes.FLOAT, allowNull:false},
-     transactionTime  :   {type: DataTypes.STRING, allowNull: false}
+     transactionTime  :   {type: DataTypes.STRING, allowNull: false},
+     transactionType    :   {type: DataTypes.STRING, defaultValue:"not-avialble"}
     },
     {
         classMethods:{
@@ -19,6 +20,7 @@ module.exports=function (sequelize, DataTypes){
                     transactionId: ordersData.transactionId,
                     amount: ordersData.amount,
                     transactionTime: ordersData.transactionTime,
+                    transactionType: ordersData.transactionType,
                     profileId   : ordersData.profileId
                 });
                     

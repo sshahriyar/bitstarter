@@ -20,9 +20,9 @@ $(document).ready(function(){
 		error : function(e){
 			if (e.responseText == 'email-taken'){
 			    av.showInvalidEmail();
-			}	else if (e.responseText == 'username-taken'){
-			    av.showInvalidUserName();
-			}
+			}	//else if (e.responseText == 'username-taken'){
+			    //av.showInvalidUserName();
+			//}
 		}
 	});
 	$('#name-tf').focus();

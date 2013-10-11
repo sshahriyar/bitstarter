@@ -67,13 +67,15 @@ exports.addNewAccount = function(newData, callback)
 
 exports.updateAccount = function(newData, callback)
 {
+     console.log(JSON.stringify(newData));
 	global.db.Profile.findOne({id:newData.id}, function(o){
 		
                 o.firstName 	= newData.firstName;
                 o.lastName      = newData.lastName;
 		o.email 	= newData.email;
                 o.password      = newData.password;
-                
+                o.message       = newData.message;
+               
 		//o.country 	= newData.country;
 		if (newData.password == ''){
 			//global.db.Profile.update(o, function(err) {
@@ -83,7 +85,8 @@ exports.updateAccount = function(newData, callback)
                                     callback("password is empty");
 			//});
 		}	else{
-			saltAndHash(newData.password, function(hash){
+                            
+                            saltAndHash(newData.password, function(hash){
                            
 				o.password = hash;
 				o.update(function(err) {
@@ -128,6 +131,7 @@ exports.addNewAccountandOrder=function(newData, callback){
                                                      transactionId: newData.txn_id,
                                                      amount: newData.amount,
                                                      transactionTime: newData.payment_date,
+                                                     transactionType:newData.transactionType,
                                                      profileId : profile.id
                                                      }
                                                     ).success(function(){
@@ -148,6 +152,7 @@ exports.addNewOrder= function(profile, orderData,callback){
                             transactionId: orderData.txn_id,
                             amount: orderData.amount,
                             transactionTime: orderData.payment_date,
+                            transactionType: orderData.transactionType,
                             profileId: profile.id
                             },
                            callback);

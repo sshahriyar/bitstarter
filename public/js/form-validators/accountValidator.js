@@ -43,7 +43,8 @@ function AccountValidator(){
 AccountValidator.prototype.showInvalidEmail = function()
 {
 	this.controlGroups[2].addClass('error');
-	this.showErrors(['That username (email) is already in use. Have you forgotten your password?']);
+	this.showErrors(['That username (email) is already in use. \n\
+                                            Have you forgotten your password?<a href="https://debug007.com/login"> Click here </a>']);
 }
 
 
