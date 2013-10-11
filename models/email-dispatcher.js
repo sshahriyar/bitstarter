@@ -3,25 +3,31 @@ var ES = require('./email-settings');
 var EM = {};
 module.exports = EM;
 
-EM.server = require("emailjs/email").server.connect({
+EM.server  = require('sendgrid')(
+  ES.user,//process.env.SENDGRID_USERNAME,
+  ES.password//process.env.SENDGRID_PASSWORD
+);
 
-	host 	    : ES.host,
-	user 	    : ES.user,
-	password    : ES.password,
-        domain      : ES.domain,
-        authentication : 'plain',
-	ssl	    : true
-
-});
+//EM.server = require("emailjs/email").server.connect({
+//
+//	host 	    : ES.host,
+//	user 	    : ES.user,
+//	password    : ES.password,
+//        domain      : ES.domain,
+//        authentication : 'plain',
+//	ssl	    : true
+//
+//});
 
 EM.dispatchResetPasswordLink = function(account, callback)
 {
 	EM.server.send({
-		from         : ES.sender,
+		from         : ES.sender,   
+                fromname     : ES.senderName,
 		to           : account.email,
 		subject      : 'Password Reset',
-		text         : 'something went wrong... :(',
-		attachment   : EM.composeResetEmail(account)
+                //text         : 'something went wrong... :(',
+		html         : EM.composeResetEmail(account)
 	}, callback );
 }
 
@@ -29,10 +35,11 @@ EM.loginLink = function(account, callback)
 {
 	EM.server.send({
 		from         : ES.sender,
+                fromname     : ES.senderName,
 		to           : account.email,
 		subject      : 'Donation Acknowledgment from Debug007',
-		text         : 'Thank you for your donation',
-		attachment   : EM.composeLoginEmail(account)
+		//text         : 'Thank you for your donation',
+		html         : EM.composeLoginEmail(account)
 	}, callback );
 }
 
@@ -60,7 +67,7 @@ EM.composeLoginEmail = function(o){
                 
 		html += " Best regards,<br> Debug007 Team</a><br><br>";
 		html += "</body></html>";
-	return  [{data:html, alternative:true}];
+	return  html;//[{data:html, alternative:true}];
 }
 
 
@@ -73,5 +80,5 @@ EM.composeResetEmail = function(o)
 		html += "<a href='"+link+"'>Please click here to reset your password</a><br><br>";
 		html += " Best regards,<br> Debug007 Team</a><br><br>";
 		html += "</body></html>";
-	return  [{data:html, alternative:true}];
+	return  html;//[{data:html, alternative:true}];
 }
