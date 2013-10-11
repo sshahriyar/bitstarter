@@ -2,7 +2,7 @@
 var crypto 		= require('crypto');
 //var mysql        	= require('mysql');//pg for postgresql
 //var Server 		= require('mongodb').Server;
-var moment 		= require('moment');
+//var moment 		= require('moment');
 
 //var dbPort 		= 27017;
 var dbHost 		= 'localhost';

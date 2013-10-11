@@ -1,7 +1,7 @@
 {
   "name": "debug007",
   "version": "0.0.1",
-  "description": "Crowdfunder template",
+  "description": "Debug007 audience gauger",
   "main": "web.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,9 +14,7 @@
     "async": "~0.2.9",
     "request": "~2.27.0",
     "underscore": "~1.5.1",
-    "moment" : "1.7.2",
-    "emailjs": "0.3.3",
-    "restler": "2.0.1",
+    "sendgrid": "0.3.1",
     "paypal-ipn":"1.0.1"
     
   },

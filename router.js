@@ -1,5 +1,5 @@
 
-var CT = require('./models/country-list');
+//var CT = require('./models/country-list');
 var AM = require('./models/account-manager');
 var EM = require('./models/email-dispatcher');
 //var restler= require ('restler');
@@ -195,14 +195,13 @@ module.exports = function(app) {
 		AM.getAccountByEmail(req.param('email'), function(o){
 			if (o){
 				res.send('ok', 200);
-				EM.dispatchResetPasswordLink(o, function(e, m){
+				EM.dispatchResetPasswordLink(o, function(e, json){
 				// this callback takes a moment to return //
 				// should add an ajax loader to give user feedback //
-					if (!e) {
-					//	res.send('ok', 200);
-					}	else{
-						res.send('email-server-error', 400);
-						for (k in e) console.log('error : ', k, e[k]);
+					if (!e)  console.log(json);
+					else{
+						 res.send('email-server-error', 400);
+						 console.log('error : ', e);
 					}
 				});
 			}	else{
@@ -354,8 +353,12 @@ module.exports = function(app) {
                                       else{
                                           profileObj.password=""; // don't send password for existing accounts
                                           profileObj.amount=ipnData.amount;
-                                           EM.loginLink(profileObj, function(e, m){
-                                             if (e)  for (k in e) console.log('error : ', k, e[k]);
+                                           EM.loginLink(profileObj, function(e, json){
+                                                if (!e)  console.log(json);
+                                                else{
+                                                     res.send('email-server-error', 400);
+                                                     console.log('error : ', e);
+                                                }
                                            });
                                        }
                                 });
@@ -368,8 +371,12 @@ module.exports = function(app) {
                                                     else{ 
                                                          var loginData={firstName:ipnData.firstName, email:ipnData.email, 
                                                                            password:hashPassword, amount:ipnData.amount};
-                                                          EM.loginLink(loginData, function(e, m){
-                                                              if (e)  for (k in e) console.log('error : ', k, e[k]);
+                                                          EM.loginLink(loginData, function(e, json){
+                                                                if (!e)  console.log(json);
+                                                                else{
+                                                                         res.send('email-server-error', 400);
+                                                                         console.log('error : ', e);
+                                                                }
                                                            });                                  
                                                        }
                                                    });

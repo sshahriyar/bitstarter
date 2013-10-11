@@ -1,10 +1,10 @@
 
 module.exports = {
 	
-	host		: process.env.SMTP,
-	user 		: process.env.EMAIL,
-	password 	: process.env.EMAILPASSWORD,
-	sender		: 'Debug007 <'+process.env.EMAIL+'>',
+	senderName	: process.env.SENDERNAME,
+	user 		: process.env.SENDGRID_USERNAME,
+	password 	: process.env.SENDGRID_PASSWORD,
+	sender		: process.env.EMAIL,
         baseLink        : 'https://www.debug007.com'
 	
 }
