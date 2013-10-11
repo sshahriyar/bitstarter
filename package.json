@@ -16,7 +16,7 @@
     "underscore": "~1.5.1",
     "moment" : "1.7.2",
     "emailjs": "0.3.3",
-    "restler": "2.0.1",
+    "sendgrid": "0.3.0-rc.1.7",
     "paypal-ipn":"1.0.1"
     
   },

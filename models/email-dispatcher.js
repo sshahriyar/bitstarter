@@ -8,7 +8,9 @@ EM.server = require("emailjs/email").server.connect({
 	host 	    : ES.host,
 	user 	    : ES.user,
 	password    : ES.password,
-	ssl		    : true
+        domain      : ES.domain,
+        authentication : 'plain',
+	ssl	    : true
 
 });
 
