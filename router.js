@@ -9,6 +9,7 @@ module.exports = function(app) {
 
 // main  //
         app.get('/', function(req, res){
+           
    
                     res.render('index');
            
@@ -27,7 +28,7 @@ module.exports = function(app) {
 	app.get('/login', function(req, res){
 	// check if the user's credentials are saved in a cookie //
         
-		if( (req.cookies.user == undefined || req.cookies.pass == undefined) && req.session.user == null){
+		if( (req.cookies.user == undefined || req.cookies.pass == undefined) && req.session.user == undefined){
                      
 			res.render('login', { title: 'Hello - Please Login To Your Account' });
 		}	else{

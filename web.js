@@ -8,16 +8,21 @@
 
 
 
-var express = require('express');
+var express = require('express')
+
+//var https = require ('https');
+    //,redisStore = require('connect-redis')(express)
+   // ,sessionStore= new redisStore({ttl:1200})
+    , app = express()
+    ;
 var http = require('http');
-var https = require ('https');
 var fs= require ('fs');
 var async   = require('async');
 var db      = require('./models');
 // The number of milliseconds in one day
 var oneDay = 86400000;
-
- var app = express();  
+var router=require('./router')
+  
 app.configure(function(){
         //app.set('port', 8080);
 	app.set('port', process.env.PORT || 8080);
@@ -30,18 +35,35 @@ app.configure(function(){
 //	app.use(express.favicon());
 //	app.use(express.favicon(path.join(__dirname, 'public/img/favicon.ico')));
 //	app.use(express.logger('dev'));
+       
 	app.use(express.bodyParser());
+        
 	app.use(express.cookieParser());
-	app.use(express.session({ secret: 'super-duper-secret-secret' }));
-	app.use(express.methodOverride());
-	//app.use(require('stylus').middleware({ src: __dirname + '/app/public' }));
+	app.use(express.session({ secret: 'super-secret-secret', cookie: {maxAge: 600000}}));
+           // store: sessionStore }));//1200000 msec= 20 minutes
+	
+        app.use(express.methodOverride());
+        app.use(express.static(__dirname + '/public'));
+	
         //app.use(express.static(__dirname+'/public', { maxAge: oneDay }));
-	app.use(express.static(__dirname + '/public'));
+	
 });
 
+ //this uses process.env.NODE_ENV and .env file make it development
 app.configure('development', function(){
 	app.use(express.errorHandler());
 });
+
+app.configure('production', function() {
+//    app.set('db uri', 'n.n.n.n/prod');                                                                                                                                         
+    app.use(function(req, res, next) {
+        if ( req.headers['x-forwarded-proto'] === "http") {
+            return res.redirect('https://' + req.get('Host') + req.url);
+        }
+        next();
+    });
+});
+
 /* no need for ssl, heroku does it itself and transfers non ssl (unencrypted) http
 var options = {
   key: fs.readFileSync(__dirname+'/ssl/server.key'), //private key
@@ -49,8 +71,8 @@ var options = {
   ca: [fs.readFileSync(__dirname+'/ssl/gd_bundle.crt')] 
 };
 */
-
-require('./router')(app);
+//app.use(router())
+router(app);
 
 //http.createServer(app).listen(app.get('port'), function(){
 //	console.log("Express server listening on port " + app.get('port'));
