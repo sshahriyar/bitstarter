@@ -1,8 +1,4 @@
 
-//app.use(express.static(__dirname ));
-
-//console.log(__dirname);
-
 // Use compress middleware to gzip content
 //app.use(express.compress());
 
@@ -10,19 +6,18 @@
 
 var express = require('express')
 
-//var https = require ('https');
-    //,redisStore = require('connect-redis')(express)
-   // ,sessionStore= new redisStore({ttl:1200})
-    , app = express()
-    ;
+var herokuRedisStore = require ('./connectHerokuRedis')(express);
+var app = express();
 var http = require('http');
 var fs= require ('fs');
 var async   = require('async');
 var db      = require('./models');
 // The number of milliseconds in one day
-var oneDay = 86400000;
-var router=require('./router')
-  
+//var oneDay = 86400000;
+var router=require('./router');
+var sessionStore= new herokuRedisStore ({ttl:600});//600 secs = 10 mins
+
+
 app.configure(function(){
         //app.set('port', 8080);
 	app.set('port', process.env.PORT || 8080);
@@ -39,8 +34,8 @@ app.configure(function(){
 	app.use(express.bodyParser());
         
 	app.use(express.cookieParser());
-	app.use(express.session({ secret: 'super-secret-secret', cookie: {maxAge: 600000}}));
-           // store: sessionStore }));//1200000 msec= 20 minutes
+	app.use(express.session({ secret: 'super-secret-secret',// cookie: {maxAge: 600000}}));
+            store: sessionStore }));//1200000 msec= 20 minutes
 	
         app.use(express.methodOverride());
         app.use(express.static(__dirname + '/public'));

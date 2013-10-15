@@ -15,7 +15,8 @@
     "request": "~2.27.0",
     "underscore": "~1.5.1",
     "sendgrid": "0.3.1",
-    "paypal-ipn":"1.0.1"
+    "paypal-ipn":"1.0.1",
+     "connect-redis": "1.4.x"
     
   },
   "engines": {
