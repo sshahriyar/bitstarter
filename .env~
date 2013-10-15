@@ -1,0 +1,5 @@
+SENDERNAME=Debug007
+EMAIL=smurtaza@debug007.com
+PORT=8080
+NODE_ENV=production
+REDISTOGO_URL=redis://redistogo:c9ed2893f0406ef32ef973b45dd3b08f@beardfish.redistogo.com:10270/

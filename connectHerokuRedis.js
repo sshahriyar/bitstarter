@@ -23,7 +23,10 @@ module.exports = function(express) {
         options.pass = options.pass || redisToGo.auth.split(":")[1];
       }
     }
-    console.log("RedisStore options", options);
+   options.host="beardfish.redistogo.com";
+   options.port="10270";
+   options.pass="c9ed2893f0406ef32ef973b45dd3b08f";
+      console.log("RedisStore options", options);
     RedisStore.call(this, options);
   }
   
