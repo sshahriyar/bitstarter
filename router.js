@@ -21,9 +21,9 @@ module.exports = function(app) {
            
           });
           
-//          app.get('/info',function(req,res){
-//              res.render('blog');
-//          });
+          app.get('/faq',function(req,res){
+              res.render('faq');
+         });
 //login page
 	app.get('/login', function(req, res){
 	// check if the user's credentials are saved in a cookie //
