@@ -126,8 +126,12 @@
 		    <div class="icon_wrapper">
 		      <i class="glyphicons-nameplate animated"></i>
 		    </div>
-                        <h2>Preorder Membership</h2>
-                        <p> Help us determine the usefulness of this idea to you by becoming an early free or paid member 
+                        <h2>Become a Member</h2>
+                        <p> Debug007 has been developed as a plugin for Eclipse based Tracing and Monitoring Framework. It can be installed 
+                             with Eclipse or as a separate application for free. It is currently under testing before its public release. You can use it to
+                             detect anomalies in failure traces stored on your machines or you can  store traces on our servers and use Debug007 to
+                             detect anomalies. For example, in the case of mobile applications, you can direct traces from mobile devices to our servers. 
+                             To use online services, you can become a member by clicking below. 
                           </p>
                          <div class="span2">
                             
@@ -138,10 +142,8 @@
                            <div class="span3">
                            <h4> Regular Paid Membership Plans </h4>
                            <p> Unlimited failure reports, users, data retention and support </p> 
-                               20$ for 1 month
-                               <br/>  50$ for 3 months
-                                <br/> 120$ for 1 year 
-                                
+                               <br/>  50$ per month
+                                                               
                             
                            </div>
                               <br/>                            
@@ -176,7 +178,7 @@
 			<h2 >Features</h2>      
                         <h4> For a failure report, Debug007:</h4>
                         <p> Instantaneously identifies recurring faults (50-90% of faults in apps are recurring)</p>
-                        <p> Visualizes the differences between behaviour of normal and anomalous components <p>
+                        <p> Shows the anomalous patterns of function calls when the deviate from normal patterns <p>
                         <p> Shows statistical data analytics (e.g., historical trends for errors, users and devices) </p>
                         <p> Reduces the time of fault identification to almost zero in most of the cases </p>
                         <p> Allows maintainers to spend more time on fixing the fault rather than discovering it</p>
@@ -187,28 +189,31 @@
               <h2 id="how_it_works"> How it works? </h2>
 		<hr class="dashed">				
 	    <div class="row">
+		 
 		  <div class="span4">
+			<a class="thumbnail" href="">
+			  <!--<img alt="image" src="https://i.imgur.com/ZznMkl1.gif">-->
+                          <img alt="image"  src="http://i.imgur.com/507OXaH.gif">
+                        
+                        </a>
+			<h2>Identifying Anomalies</h2>
+			<p style="text-align: justify;"> Studies show that human are quite powerful in comprehending patterns and right tools can
+                        enhance this capability. Analysis of differences between patterns of function call sequences in normal executions and patterns of function call sequences in
+                        failure traces can facilitate in faster debugging and effort reduction. Debug007 uses sequence mining on normal traces (provided by 
+                        developers from test cases) and failure traces (collected from deployed apps) to show anomalous patterns of function calls as probable pointers to faults. </p>
+		  </div>
+                 <div class="span4">
 			<a class="thumbnail" href="">
 			  <img alt="image" src="https://i.imgur.com/OTIcBva.gif">
 			</a>		
 			<h2>Faulty Functions with Probability of Suspicion</h2>
 			<p style="text-align: justify;" >Scientific literature shows that 50-90% of faults in deployed software applications are recurring
-                            (i.e., previously observed) faults. However, 30-80% time of fault correction is still wasted in finding the faults. Using this knowledge, 
-                            Debug007 trains machine learning classifiers on software traces as they continue to pile up in the repository. The trained classifiers then instantaneously identifies 
+                            (i.e., previously observed) faults. However, 30-80% time of fault correction is still wasted in locating faults. Using this knowledge, 
+                            Debug007 trains machine learning classifiers on software traces of failures from deployed applications as they continue to pile up in the repository. The trained classifiers then instantaneously identifies 
                             recurrent fault locations in reports--saving valuable time.
                         </p>
 		  </div>
-		  <div class="span4">
-			<a class="thumbnail" href="">
-			  <img alt="image" src="https://i.imgur.com/ZznMkl1.gif">
-			</a>
-			<h2>Visual Analysis of Anomalous Behaviour</h2>
-			<p style="text-align: justify;"> Studies show that human are quite powerful in comprehending patterns and right tools can
-                        enhance this capability. The visual differences between normal and anomalous traces of software apps are often quite evident; whereas, 
-                        debugging anomalous traces otherwise could  be unnecessarily resource draining. Debug007 uses heuristic methods on normal traces (provided by 
-                        developers) and anomalous traces (collected from deployed apps) and visualize the differences as density plots. Debug007 also identifies
-                        if there is any anomalous component execution. </p>
-		  </div>
+                
 		  <div class="span4">
 			<a class="thumbnail" href="">
 			  <img alt="image" src="https://i.imgur.com/3tEpEIY.gif">

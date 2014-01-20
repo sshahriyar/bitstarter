@@ -29,6 +29,7 @@
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="ico/favicon.png">
      <script src="js/google-ga-analytics.js"></script>
+ 
   </head>  
 
   <body>
@@ -85,40 +86,71 @@
                                  <p> I am Shariyar Murtaza. I am a Ph.D. in software engineering from the University of Western Ontario, Canada. Specifically,
                                      I received my Ph.D. in automatic discovery of fault locations in field reports of deployed software systems.
                                      Currently, I am working as a research scientist at Concordia University, Canada, and I am focusing on automatic
-                                    detection of software attacks (anomalies) from software traces of operating systems. For further enquiries,
-                                    please send me an email at: smurtaza [[att]] debug007 [[dot]] com. </p>
+                                    detection of software attacks (anomalies) from software traces of operating systems. Dr. Nazim Madhavji was
+                                    my supervisor at the University of Western Ontario and currently I am working with Dr. Abdelwahab Hamou-Lhadj at 
+                                    Concordia University. For further enquiries, please send me an email at: smurtaza [[att]] debug007 [[dot]] com.   
+                                 
+                                 </p>
                 	     </div>				
 			  </div>
                      </div>
-		     <div class="entry">
-			  <h2>Is there a working system available for use?</h2>
-			  <hr>
-			  <div class="row-fluid">
-			      <!--<div class="span7">-->                
-				  <p>Currently, a prototype system is available for use. This site is developed to gauge 
-                                      the interest of audience first before building a full system. If you think Debug007 can be useful to you,
-                                      then please create an account to let us know your interest in the final product. A Java based prototype
-                                      application can be downloaded by creating an account on this site or by just sending 
-                                      an email to smurtaza[[att]]debug007[[dot]]com. </p>
-                           <!--</div>-->				
-		         </div>
-                     </div>
+		     
 		   
              <div class="entry">
-			  <h2>How will the final system be made available?</h2>
+			  <h2>Which technology is Debug007 based on?</h2>
 			  
 			  <hr>
 			  <div class="row-fluid">
 			     <!--<div class="span7">-->                
-				  <p> Debug007 will be made available as an online service where mobile developers will also be able to store 
-                                      the field reports of their applications. A part of the system will also be made available as an open
-                                      source system for developers interested in their own server deployment.
+                             <p> Debug007 is built on top of <a href="http://lttng.org/eclipse" target="_blank">Tracing and Monitoring Framework (TMF)</a> which is available as
+                                 a plugin in Eclipse and can be downloaded separately too. Debug007 leverages TMF to provide the functionality of automatic
+                                 detection of locations of faults. Debug007 is a part of a bigger project, Total Anomaly Detection System (TotalADS). TotalADS
+                                 focuses on: (a) detection of attacks using kernel space traces; and (b) detection of faults in software maintenance using
+                                 user space traces. Debug007 takes care of fault detection. Following are some of the screenshots of TotalADS.
+                                                                  
+                              </p>
+                           
+                               <div class="span5">
+                                 <a id="img1" class="thumbnail" href="#" title="Debug007 Screenshot" >
+                                     <img alt="image"  src="https://i.imgur.com/BoQRy8Q.png">
+                                 </a>
+                               </div>
+                           <div class="span5">
+                                 <a class="thumbnail" href="#" title="Debug007 Screenshot">
+                                        <img alt="image"  src="http://i.imgur.com/eMpgHh8.png">
+                                 </a>
+                          
+                            </div>
+                      </div>
+             </div>  
+                <div class="entry">
+			  <h2>How can I download it?</h2>
+			  <hr>
+			  <div class="row-fluid">
+			      <!--<div class="span7">-->                
+				  <p> Debug007 will be available in Eclipse Marketplace soon. Currently, Debug007 is under testing phase before its
+                                      public release.  
                                   </p>
-                 
-		            <!--</div>-->				
-		       </div>
-            </div>
+                           <!--</div>-->				
+		         </div>
+                   </div>  
+                      
                       <div class="entry">
+			  <h2>What kind of traces Debug007 works on?</h2>
+			  <hr>
+			  <div class="row-fluid">
+			      <!--<div class="span7">-->                
+				  <p> Debug007 works on function call traces collected during crashes or non-crashes. Traces can be in the
+                                      CTF format generated by <a href=http://lttng.org target="_blank">LTTng </a> or they can be in a simple text format.
+                                      Debug007 parses text traces using a regular expression as provided by developers. Custom parsers of other kinds
+                                      of trace formats can easily be added to Debug007 as Java classes. If you wish to customize Debug007 to your 
+                                      organization's needs please contact at smurtaza [[att]] debug007 [[dot]] com.
+            
+                                  </p>
+                           <!--</div>-->				
+		         </div>
+                   </div> 
+                     <div class="entry">
 			  <h2>Has any thing been published on Debug007?</h2>
 			  
 			  <hr>
@@ -138,13 +170,8 @@
                                   </p>
                                   
                                   <p>
-                                  Murtaza, S.S.; Khreich, W.; Hamou-Lhadj, A.; Couture, M.; " A Host-based Anomaly Detection Approach by
-                                  Representing System Calls as States of Kernel Modules ", 24th Intl. Symposium on Software Reliability Engineering, IEEE,
-                                  CA, USA, Nov. 2013.
-                                  </p>
-                                  <p>
                                   Murtaza, S.S.; Hamou-Lhadj, A.; Madhavji, N.H.; Gittens, M. “An Empirical Study on the Use of Mutant Traces
-                                  in Fault Discovery”, Journal of System and Software, October, 2013--in the process of publication.
+                                  in Fault Discovery”, Journal of System and Software, Available online 12 December 2013, ISSN 0164-1212.
                                  </p>
                  
 		            <!--</div>-->				
@@ -219,13 +246,33 @@
 		</div>	  
       </div>	  
     </div>
+            
+            
+   <!-- Modal Window -->
+   <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"  style="width:800px;">
+       <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal">x</button>
+           <h3 class="modal-title">Heading</h3>
+       </div>
+       <div class="modal-body">
+           
+       </div>
+       <div class="modal-footer">
+           <button class="btn" data-dismiss="modal">Close</button>
+       </div>
+   </div>
+            
+            
+            
+            
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js"></script>
+    
 	<script src="js/jquery.fitvids.js"></script>
 	<script src="js/jqBootstrapValidation.js"></script>
 	<script src="js/bounce.js"></script>	
- <script>
+      <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -235,5 +282,15 @@
             ga('send', 'pageview');
 
        </script>
+     <script>
+     $('.thumbnail').click(function(){
+        $('.modal-body').empty();
+        var title=$(this).attr("title");
+        $('.modal-title').html(title);
+        $(this.innerHTML).appendTo('.modal-body');
+        $('#myModal').modal('show');
+     }); 
+     </script>
+         
   </body>
 </html>
